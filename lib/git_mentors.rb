@@ -1,8 +1,9 @@
-require_relative 'github_adapter'
 require 'pry-byebug'
 require 'awesome_print'
 require 'dotenv'
 Dotenv.load
+
+require_relative 'github_adapter'
 
 class GitMentors
 
@@ -12,11 +13,16 @@ class GitMentors
   end
 
   def start_CLI
+
+    username = "DBC-SF"
+
     orgs = find_all_user_orgs
-    list_output(orgs)
-    input_org = find_org(select_prompt, orgs)
+    display_list_output(orgs)
+    input_org = find_org(display_select_prompt, orgs)
     team_id = find_org_employees_team_id(input_org["login"])
-    ap add_user("DBC-SF", team_id)
+    result = add_user(username, team_id)
+    return display_confirmation(input_org["login"], username, result["state"]) if result["state"] == "pending"
+    display_failure(input_org["login"], username, result)
   end
 
   private
@@ -39,18 +45,27 @@ class GitMentors
   end
 
 
-  def list_output(arr)
+  def display_list_output(arr)
     arr.each_with_index do |item, index|
       puts "#{index+1}: #{item['login']}"
     end
   end
 
-  def select_prompt
+  def display_select_prompt
     puts "Select Cohort (int)"
     print "=> "
     gets.chomp.to_i
   end
 
+  def display_confirmation(org_name, username, result)
+    puts "Added #{username} to #{org_name}. Their status is #{result}."
+  end
+
+  def display_failure(org_name, username, result)
+    puts "FAILED! #{username} was not added to #{org_name}. The result was:"
+    ap result
+  end
+
 end
 
-git_mentors = GitMentors.new
+GitMentors.new

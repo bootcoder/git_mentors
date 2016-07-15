@@ -1,6 +1,4 @@
-require 'pry-byebug'
 require 'httparty'
-require 'awesome_print'
 
 class GithubAdapter
 
@@ -25,7 +23,6 @@ class GithubAdapter
   end
 
   def team_add_user(username, team_id)
-    # PUT /teams/:id/memberships/:username
     self.class.put("/teams/#{team_id}/memberships/#{username}", basic_auth: @auth)
   end
 
