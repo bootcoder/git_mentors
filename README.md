@@ -20,3 +20,8 @@ Allow a given user as owner to add a set of users to an org and teams.
 - add each user to a given org and team
 - display confirmation and count when complete
 
+### Next Steps
+- Add tests
+- Add better CLI interface with confirmation for cohort org before add batch
+- add batch method which will parse over a given input
+- package into a gem and publish

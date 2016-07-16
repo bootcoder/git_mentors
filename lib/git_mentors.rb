@@ -4,8 +4,11 @@ require 'dotenv'
 Dotenv.load
 
 require_relative 'github_adapter'
+require_relative 'view'
 
 class GitMentors
+
+  include View
 
   def initialize
     @github = GithubAdapter.new(ENV['GIT_EMAIL'],ENV['GIT_PASSWORD'])
@@ -17,12 +20,15 @@ class GitMentors
     username = "DBC-SF"
 
     orgs = find_all_user_orgs
-    display_list_output(orgs)
-    input_org = find_org(display_select_prompt, orgs)
-    team_id = find_org_employees_team_id(input_org["login"])
+    list_output(orgs)
+    selected_org = find_org(select_prompt, orgs)
+    team_id = find_org_employees_team_id(selected_org["login"])
     result = add_user(username, team_id)
-    return display_confirmation(input_org["login"], username, result["state"]) if result["state"] == "pending"
-    display_failure(input_org["login"], username, result)
+    if result["state"] == "pending" || result["state"] == "active"
+      display_confirmation(selected_org["login"], username, result["state"])
+    else
+      display_failure(selected_org["login"], username, result)
+    end
   end
 
   private
@@ -36,36 +42,17 @@ class GitMentors
   end
 
   def find_org(org_index, orgs)
-    orgs[org_index-1]
+    orgs[org_index]
   end
 
-  def find_org_employees_team_id(input_org)
-    teams = @github.get_org_teams(input_org).select{|team| team["name"] == "Employees"}
-    teams.first["id"] if !teams.empty? && teams.first["name"] == "Employees"
-  end
-
-
-  def display_list_output(arr)
-    arr.each_with_index do |item, index|
-      puts "#{index+1}: #{item['login']}"
-    end
-  end
-
-  def display_select_prompt
-    puts "Select Cohort (int)"
-    print "=> "
-    gets.chomp.to_i
-  end
-
-  def display_confirmation(org_name, username, result)
-    puts "Added #{username} to #{org_name}. Their status is #{result}."
-  end
-
-  def display_failure(org_name, username, result)
-    puts "FAILED! #{username} was not added to #{org_name}. The result was:"
-    ap result
+  def find_org_employees_team_id(selected_org)
+    teams = @github.get_org_teams(selected_org).select{|team| team["name"] == "Employees"}
+    teams.first["id"] unless teams.empty?
   end
 
 end
 
 GitMentors.new
+puts "All done, Have a nice day!"
+
+

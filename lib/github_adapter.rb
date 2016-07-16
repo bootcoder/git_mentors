@@ -10,7 +10,7 @@ class GithubAdapter
     @auth = {username: u, password: p}
   end
 
-  def test(endpoint)
+  def test_endpoint(endpoint)
     self.class.get(endpoint, basic_auth: @auth)
   end
 
