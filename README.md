@@ -4,6 +4,13 @@
 
 Allow a given user as owner to add a set of users to an org and teams.
 
+#### Executing Script
+This script relies on a .env file which contains the following keys
+- GIT_EMAIL
+- GIT_PASSWORD
+
+After you have that just run lib/git_mentors.rb and follow along.
+
 ### PSEUDO:
 
 - ask cli for username && password
@@ -25,3 +32,4 @@ Allow a given user as owner to add a set of users to an org and teams.
 - Add better CLI interface with confirmation for cohort org before add batch
 - add batch method which will parse over a given input
 - package into a gem and publish
+- maybe lose .env in favor of dynamically entering credentials each run

@@ -16,7 +16,7 @@ class GitMentors
   end
 
   def start_CLI
-
+  # username var needs to be replaced by a method to iterate over list of GH usernames
     username = "DBC-SF"
 
     orgs = find_all_user_orgs
