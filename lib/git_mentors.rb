@@ -12,8 +12,8 @@ class GitMentors
 
   def initialize
     @github = GithubAdapter.new(ENV['GIT_EMAIL'],ENV['GIT_PASSWORD'])
-    # @current_mentors = ["klvngann", "toddseller", "jbomotti", "HolixSF", "TopGirlCoder", "ashbymichael", "alfredlam42", "whoisglover", "Coderica", "creatyvtype", "galenscook", "TriathlonCodes", "ckammerl", "jaredsmithse", "lightninglord", "banudalamanli", "RNBrandt", "Zanibas", "DonLang", "benvogcodes", "afayek1", "dianpan", "devin-liu", "ryanau", "XanderPSON", "its-swats", "wenwei63029869", "themcny", "kevinzwh", "hyendler", "EclecticKlos", "markjanzer", "WhaleMonster", "paulozag", "arcman7", "resalisbury", "tmashuang", "nathanmpark", "angelafield"]
-    @current_mentors = ["DBC-SF", "asdjjjasiiaweeeweaga232"]
+    # @current_mentors = ["klvngnn", "toddseller", "jbomotti", "HolixSF", "TopGirlCoder", "ashbymichael", "alfredlam42", "whoisglover", "Coderica", "creatyvtype", "galenscook", "ckammerl", "jaredsmithse", "lightninglord", "banudalamanli", "RNBrandt", "Zanibas", "DonLang", "benvogcodes", "afayek1", "dianpan", "devin-liu", "ryanau", "XanderPSON", "its-swats", "wenwei63029869", "themcny", "kevinzwh", "hyendler", "EclecticKlos", "markjanzer", "WhaleMonster", "paulozag", "arcman7", "resalisbury", "tmashuang", "nathanmpark", "angelafield"]
+    @current_mentors = ["DBC-SF", "laksdjlfkajsdflkafjlskdjf"]
     start_CLI
   end
 
