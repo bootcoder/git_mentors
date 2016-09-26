@@ -5,11 +5,15 @@
 Allow a given user as owner to add a set of users to an org and teams.
 
 #### Executing Script
-This script relies on a .env file which contains the following keys
+This script relies on a __OPTIONAL__ .env file which contains the following keys
 - GIT_EMAIL
 - GIT_PASSWORD
 
-After you have that just run lib/git_mentors.rb and follow along.
+Add usernames to the git_mentors.rb initialize method under the varibale `current_mentors`.
+Or pass them as space delimited ARGV input to the script.
+
+Basically, just run lib/git_mentors.rb and follow along. You'll figure it out ;-)
+
 
 ### PSEUDO:
 
